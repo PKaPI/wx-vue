@@ -2,7 +2,7 @@
 
 > A Mpvue project
 # 文档结构
-.
+```
 ├── README.md
 ├── build
 │   ├── build.js
@@ -66,6 +66,7 @@
 │       └── orders.png
 ├── tree.md
 └── yarn.lock
+```
 
 ## Build Setup
 
