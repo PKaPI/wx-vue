@@ -29,9 +29,9 @@ const responseInterceptors = { // 响应拦截
 
     if (status !== 200) {
       // 请求异常
-      wx.redirectTo({
-        url: "/pages/login"
-      });
+      // wx.redirectTo({
+      //   url: "/pages/login"
+      // });
     }
 
     if (message.indexOf('timeout') > -1) {
@@ -44,9 +44,9 @@ class Reqeust {
   constructor(options) {
     this.options = options;
     this.defaultConfig = {
-      baseURL: options.baseURL, // base url
+      // baseURL:, // base url
       // timeout: 3000, // timeout milliseconds
-      headers: options.headers,
+      // headers: options.headers,
     };
 
     this.fly = new Flyio();
@@ -109,11 +109,10 @@ class Reqeust {
   }
   send(path, options = {}) {
     const config = Object.assign({}, this.defaultConfig);
-    config.baseURL = options.baseURL || this.options.baseURL;
     config.method = options.method || 'GET';
     config.params = options.params || {};
     return this.fly.request(path, options.data, config).then(response => response.data);
   }
 }
 
-export default Reqeust;
+export default new Reqeust();

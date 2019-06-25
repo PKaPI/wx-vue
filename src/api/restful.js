@@ -1,14 +1,10 @@
 export default {
   getUserData:{
     method:'get',
-    url:'/mock/userData.json'
+    url:'static/mock/userData.json'
   },
-  getNavData:{
+  getListData:{
     method:'get',
-    url:'/mock/navData.json'
-  },
-  getHomeData:{
-    method:'get',
-    url:'/mock/homeData.json'
+    url:'https://www.heyuhsuo.xyz/heyushuo/index/index'
   }
 }

@@ -10,7 +10,8 @@ const debug = process.env.NODE_ENV !== "production";
 
 const store = new Vuex.Store({
   state: {
-    loading: true
+    loading: true,
+    cityName: "定位中.."
   },
   modules: {
     global
@@ -18,6 +19,11 @@ const store = new Vuex.Store({
   mutations: {
     gm_SET_LOADING(state, loading) {
       state.loading = loading;
+    },
+    update(state, config) {
+      Object.keys(config).map((item, key) => {
+        state[item] = config[item]
+      })
     }
   },
   actions: {
