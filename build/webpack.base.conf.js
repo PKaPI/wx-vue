@@ -9,6 +9,7 @@ var MpvuePlugin = require('webpack-mpvue-asset-plugin')
 var glob = require('glob')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var relative = require('relative')
+// const MpvueEntry = require('mpvue-entry');
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -28,6 +29,8 @@ const appEntry = { app: resolve('./src/main.js') }
 const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
 const entry = Object.assign({}, appEntry, pagesEntry)
 
+// const entry = MpvueEntry.getEntry('./src/app.json');
+
 let baseWebpackConfig = {
   // 如果要自定义生成的 dist 目录里面的文件路径，
   // 可以将 entry 写成 {'toPath': 'fromPath'} 的形式，
@@ -46,6 +49,7 @@ let baseWebpackConfig = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue': 'mpvue',
+      'socket.io-client': 'weapp.socket.io',
       '@': resolve('src')
     },
     symlinks: false,
@@ -103,6 +107,7 @@ let baseWebpackConfig = {
       'mpvuePlatform': 'global.mpvuePlatform'
     }),
     new MpvuePlugin(),
+    // new MpvueEntry(),
     new CopyWebpackPlugin([{
       from: '**/*.json',
       to: ''
@@ -115,7 +120,14 @@ let baseWebpackConfig = {
         to: path.resolve(config.build.assetsRoot, './static'),
         ignore: ['.*']
       }
-    ])
+    ]),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../node_modules/vant-weapp/dist'),
+        to: path.resolve(config.build.assetsRoot, '../vant-weapp'),
+        ignore: ['.*']
+      }
+    ]),
   ]
 }
 
