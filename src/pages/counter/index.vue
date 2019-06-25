@@ -13,6 +13,11 @@
 import store from './store'
 
 export default {
+  data() {
+    return {
+      region: [],
+    };
+  },
   computed: {
     count () {
       return store.state.count

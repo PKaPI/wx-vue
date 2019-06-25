@@ -1,0 +1,12 @@
+{
+  "data": {
+    "id": 0,
+    "name": "charles",
+    "age": 29,
+    "tel": "13051513936",
+    "email": "yhx@dtstack.com"
+  },
+  "success": true,
+  "code": 1,
+  "message": "执行成功"
+}

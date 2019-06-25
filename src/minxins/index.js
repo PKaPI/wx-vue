@@ -26,14 +26,14 @@ MyPlugin.install = function (Vue) {
         Object.assign(this.$data, oldData.data)
       }
     },
-
     onLoad() {
       if (this.$isPage()) {
         // 新进入页面 初始化数据
-        Object.assign(this.$data, this.$options.data())
+        // this.$options.data.call(this)
+        console.log(this.$data)
+        Object.assign(this.$data,this.$options.data.call(this))
       }
     },
-
     onUnload() {
       if (this.$isPage()) {
         // 退出页面，删除数据
@@ -42,7 +42,6 @@ MyPlugin.install = function (Vue) {
         console.log(pageDatas);
       }
     },
-
     onHide() {
       if (this.$isPage()) {
         // 将要隐藏时，备份数据
