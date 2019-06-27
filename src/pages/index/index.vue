@@ -1,7 +1,7 @@
 <template>
   <div class="index">
+    <div @click="toMappage" class="map_location">{{cityName}}</div>    
     <div class="search">
-      <div @click="toMappage">{{cityName}}</div>
       <div @click="toSearch">
         <input type="text" placeholder="搜索商品">
         <span class="icon"></span>
@@ -135,6 +135,7 @@ export default {
   mounted() {
     this.getCityName();
     this.getData();
+    this.getUserInfo();
   },
   data() {
     return {
@@ -150,6 +151,18 @@ export default {
   components: {},
   methods: {
     ...mapMutations(["update"]),
+     getUserInfo:function(cb){
+      var that = this
+      wx.login({
+        success: function () {
+          wx.getUserInfo({
+            success: function (res) {
+              that.$storage.set("userInfo", res.userInfo);
+            }
+          })
+        }
+      })
+   },
     toMappage() {
       var _this = this;
       // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
@@ -199,7 +212,6 @@ export default {
       });
     },
     async getData() {
-      console.log(API)
       const data = API.getListData().then(res=>{
          this.banner = res.banner;
           this.channel = res.channel;
